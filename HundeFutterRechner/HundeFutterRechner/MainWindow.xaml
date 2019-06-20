@@ -1,0 +1,263 @@
+﻿<Window x:Class="HundeFutterRechner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HundeFutterRechner"
+        mc:Ignorable="d"
+        Title="Hundefutter Rechner" Height="750" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Storyboard x:Key="button_gone">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:2"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="button_back">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="b_berechnen" To="1" Duration="0:0:2"></DoubleAnimation>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="napf_sehr_voll">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="napf_voll">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="napf_halb">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="tuete_kippen" Storyboard.TargetName="trockenTuete">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.Top)" Storyboard.TargetName="trockenTuete">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="110"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:11.5" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:12" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:12.4" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:13" Value="110"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="trockenTuete">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:11.5" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:12" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:12.4" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:13" Value="20"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="trockenTuete">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:11.5" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:12" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:12.4" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:13" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="futter_faellt" BeginTime="0:0:2" RepeatBehavior="10x">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.Top)" Storyboard.TargetName="tf1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="260"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.Top)" Storyboard.TargetName="tf2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="260"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="260"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Canvas.Top)" Storyboard.TargetName="tf3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="260"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="260"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="tf1">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="tf2">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.7" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="tf3">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.8" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.9" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="napf_fuellen">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="napf_halb">
+                <DiscreteObjectKeyFrame KeyTime="0:0:4.6" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="napf_voll">
+                <DiscreteObjectKeyFrame KeyTime="0:0:8.6" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="napf_sehr_voll">
+                <DiscreteObjectKeyFrame KeyTime="0:0:10.4" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        
+        <local:FutterListe x:Key="res_trocken" />
+        <local:FutterListe x:Key="res_nass" />
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Control.FontFamily" Value="Cambria"></Setter>
+            <Setter Property="Control.FontSize" Value="18"></Setter>
+            <Setter Property="Control.Padding" Value="5"></Setter>
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Control.FontSize" Value="20"></Setter>
+            <Setter Property="Control.FontFamily" Value="Cambria"></Setter>
+            <Setter Property="Control.Margin" Value="10"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Control.FontFamily" Value="Cambria"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Control.FontFamily" Value="Cambria"></Setter>
+            <Setter Property="Control.FontSize" Value="20"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Control.FontSize" Value="20"></Setter>
+            <Setter Property="Control.FontFamily" Value="Cambria"></Setter>
+            <Setter Property="Control.Margin" Value="10"></Setter>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Control.FontSize" Value="18"></Setter>
+            <Setter Property="Control.FontFamily" Value="Cambria"></Setter>
+            <Setter Property="Control.Margin" Value="10"></Setter>
+        </Style>
+        <Style TargetType="{x:Type GroupBox}">
+            <Setter Property="BorderThickness" Value="0"></Setter>
+        </Style>
+        
+    </Window.Resources>
+    <UserControl>
+        <UserControl.Resources>
+            <ResourceDictionary>
+                <BitmapImage x:Key="Futtertuete" UriSource="/Resources/Futtertuete.png"></BitmapImage>
+                <BitmapImage x:Key="Napf" UriSource="/Resources/Napf_gruen.png"></BitmapImage>
+                <BitmapImage x:Key="Napf_halbvoll" UriSource="/Resources/Napf_gruen_halbvoll.png"></BitmapImage>
+                <BitmapImage x:Key="Napf_voll" UriSource="/Resources/Napf_gruen_voll.png"></BitmapImage>
+                <BitmapImage x:Key="Napf_sehr_voll" UriSource="/Resources/Napf_gruen_sehr_voll.png"></BitmapImage>
+                <BitmapImage x:Key="Trockenfutter" UriSource="/Resources/Trockenfutter_dunkel.png"></BitmapImage>
+            </ResourceDictionary>
+        </UserControl.Resources>
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Offset="0.0" Color="Aquamarine"></GradientStop>
+                    <GradientStop Offset="1.0" Color="Green"></GradientStop>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" FontSize="28" Margin="10" FontWeight="ExtraBold">Hundefutter-Rechner</Label>
+            <GroupBox Grid.Row="1" Name="Mischung">
+                <WrapPanel  Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <RadioButton Name="rb_trocken" Checked="rb_trocken_Checked">trocken</RadioButton>
+                    <RadioButton Name="rb_nass" Checked="rb_nass_Checked">nass</RadioButton>
+                    <RadioButton Name="rb_gemischt" Unchecked="rb_gemischt_Unchecked" Checked="rb_gemischt_Checked">gemischt</RadioButton>
+                </WrapPanel>
+            </GroupBox>
+            <WrapPanel x:Name="comboboxes" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Visibility="Hidden">
+                <ComboBox Name="trockenFutter" Width="350" DropDownOpened="trockenFutter_DropDownOpened">
+                    <ComboBox.ItemsSource>
+                        <Binding Source="{StaticResource res_trocken}"/>
+                    </ComboBox.ItemsSource>
+                </ComboBox>
+                <ComboBox Name="nassFutter" Width="350" DropDownOpened="nassFutter_DropDownOpened">
+                    <ComboBox.ItemsSource>
+                        <Binding Source="{StaticResource res_nass}"/>
+                    </ComboBox.ItemsSource>
+                </ComboBox>
+            </WrapPanel>
+
+            <Grid Grid.Row="3" x:Name="mischer" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="1" x:Name="mix_trocken" Grid.Column="0" HorizontalAlignment="Center">Trocken: 50 %</Label>
+                <Label Grid.Row="1" Grid.Column="1" x:Name="mix_nass" HorizontalAlignment="Center">Nass: 50 %</Label>
+                <Slider Grid.Row="0" Grid.ColumnSpan="2" x:Name="sl_mix"  Width="400" Minimum="0" Maximum="100" Value="50" TickFrequency="5" TickPlacement="BottomRight" ValueChanged="sl_mix_ValueChanged"></Slider>
+            </Grid>
+
+            <WrapPanel Grid.Row="4" HorizontalAlignment="Center">
+                <Label VerticalAlignment="Center">Gewicht (kg)</Label>
+                <TextBox x:Name="tb_gewicht" Width="75" VerticalAlignment="Center" TextChanged="tb_gewicht_TextChanged"></TextBox>
+                <CheckBox x:Name="cb_wunsch" VerticalAlignment="Center" Checked="cb_wunsch_Checked" Unchecked="cb_wunsch_Unchecked">abweichendes Wunschgewicht</CheckBox>
+                <TextBox x:Name="tb_wunsch" Width="75" VerticalAlignment="Center" Visibility="Hidden" TextChanged="tb_wunsch_TextChanged"></TextBox>
+            </WrapPanel>
+            <WrapPanel Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label x:Name="l_dosengroesse" Visibility="Hidden">Dosengröße (g)</Label>
+                <ComboBox x:Name="dosengroesse" Visibility="Hidden" DropDownOpened="dosengroesse_DropDownOpened">
+                    <ComboBoxItem>1240</ComboBoxItem>
+                    <ComboBoxItem>800</ComboBoxItem>
+                    <ComboBoxItem IsSelected="True">400</ComboBoxItem>
+                    <ComboBoxItem>200</ComboBoxItem>
+                    <ComboBoxItem>185</ComboBoxItem>
+                    <ComboBoxItem>125</ComboBoxItem>
+                </ComboBox>
+                <Label>Portionen</Label>
+                <ComboBox x:Name="cobox_portionen" DropDownOpened="cobox_portionen_DropDownOpened">
+                    <ComboBoxItem IsSelected="True">1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                </ComboBox>
+                <Button Name="b_berechnen" VerticalAlignment="Center" Click="b_berechnen_Click" Margin="20,0,0,0">berechnen</Button>
+            </WrapPanel>
+
+            <WrapPanel x:Name="antwort" Grid.Row="6" HorizontalAlignment="Center" Visibility="Hidden">
+                <Label x:Name="ergebnis">g</Label>
+            </WrapPanel>
+            <Canvas x:Name="canvas" Grid.Row="7">
+                <Image x:Name="trockenTuete" Canvas.Top="110" Canvas.Left="20" Height="200" Source="{StaticResource Futtertuete}" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+
+                <Image x:Name="napf" Canvas.Top="200" Canvas.Left="200" Width="170" Source="{StaticResource Napf}"/>
+                <Image x:Name="napf_halb" Canvas.Top="200" Canvas.Left="200" Width="170" Source="{StaticResource Napf_halbvoll}" Visibility="Hidden"/>
+                <Image x:Name="napf_voll" Canvas.Top="200" Canvas.Left="200" Width="170" Source="{StaticResource Napf_voll}" Visibility="Hidden"/>
+                <Image x:Name="napf_sehr_voll" Canvas.Top="200" Canvas.Left="200" Width="170" Source="{StaticResource Napf_sehr_voll}" Visibility="Hidden"/>
+                <Image x:Name="tf1" Canvas.Top="180" Canvas.Left="250" Width="20" Visibility="Hidden" Source="{StaticResource Trockenfutter}"></Image>
+                <Image x:Name="tf2" Canvas.Top="180" Canvas.Left="250" Width="20" Visibility="Hidden" Source="{StaticResource Trockenfutter}"></Image>
+                <Image x:Name="tf3" Canvas.Top="180" Canvas.Left="250" Width="20" Visibility="Hidden" Source="{StaticResource Trockenfutter}"></Image>
+            </Canvas>
+            <StatusBar Grid.Row="8" Grid.ColumnSpan="2">
+                <StatusBarItem Name="sb_Fehlermeldung"></StatusBarItem>
+            </StatusBar>
+        </Grid>
+    </UserControl>
+</Window>
