@@ -4,3 +4,4 @@ Dieses Projekt ist von mir als Projektaufgabe im Fach ".NET-Programmierung mit C
 Aufgabe war die Erstellung einer WPF-Anwendung, die bestimmte Bedingungen erfüllte.
 Dieses Programm soll es einem Hundebesitzer erleichtern, herauszufinden, wie viel der betreffende Hund laut Herstellerangaben von dem betreffenden Futter bekommen soll. Die Angaben stammen von echten Tierfutterverpackungen und werden aus einer .csv-Datei vom Programm eingelesen.
 Alle Grafiken wurden von mir erstellt.
+Das Projekt wurde nicht Mithilfe von Git erstellt und enthält daher keine Zwischencommits.
